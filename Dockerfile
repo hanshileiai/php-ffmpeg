@@ -19,9 +19,8 @@ RUN DEBIAN_FRONTEND=noninteractive echo "Install imagick:" \
     && pecl install imagick && docker-php-ext-enable imagick 
 
 RUN DEBIAN_FRONTEND=noninteractive echo "Install ffmpeg:" \
-    && sh -c 'echo "deb http://www.deb-multimedia.org jessie main" >> /etc/apt/sources.list' \
+    && sh -c 'echo "deb http://ftp.uk.debian.org/debian jessie-backports main" >> /etc/apt/sources.list' \
     && apt-get update \
-    && apt-get install -y deb-multimedia-keyring \
     && apt-get install -y ffmpeg
 
 RUN echo " Clean up:"  && \
