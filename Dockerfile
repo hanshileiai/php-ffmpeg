@@ -23,6 +23,10 @@ RUN DEBIAN_FRONTEND=noninteractive echo "Install ffmpeg:" \
     && apt-get update \
     && apt-get install -y ffmpeg
 
+RUN echo " Install node, npm: " && \ 
+    curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
+    apt-get install -y nodejs
+
 RUN echo " Clean up:"  && \
     apt-get clean  && \
     rm -rf /var/lib/apt/lists/*
