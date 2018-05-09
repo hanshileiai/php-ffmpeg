@@ -2,7 +2,7 @@ FROM php:7.1-fpm
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y libpng12-dev libjpeg-dev git curl wget libmagickwand-dev libmagickcore-dev \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-    && docker-php-ext-install gd pdo_mysql zip opcache \
+    && docker-php-ext-install gd mysqli pdo_mysql zip opcache \
     
     && curl -sS https://getcomposer.org/installer | php -d detect_unicode=Off \
     && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer \
