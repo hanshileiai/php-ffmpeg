@@ -1,2 +1,2 @@
-php 5.7 Dockerfile
-+ php-ffmpeg
+php:7.4-fpm Dockerfile
++ php-ffmpeg 

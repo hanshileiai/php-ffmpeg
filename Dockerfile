@@ -1,14 +1,14 @@
-FROM php:7.1-fpm
+FROM php:7.4-fpm
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends apt-utils libpng-dev libjpeg-dev git curl wget libmagickwand-dev libmagickcore-dev libtidy-dev \
-    && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-    && docker-php-ext-install gd mysqli pdo_mysql zip opcache tidy \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends libpng-dev libjpeg-dev git curl wget libmagickwand-dev libmagickcore-dev libzip-dev libtidy-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd mysqli pdo_mysql zip opcache tidy
     
-    && curl -sS https://getcomposer.org/installer | php -d detect_unicode=Off \
+RUN DEBIAN_FRONTEND=noninteractive curl -sS https://getcomposer.org/installer | php -d detect_unicode=Off \
     && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer \
-    && composer self-update \
+    && composer self-update
 
-    && curl -L https://pecl.php.net/get/redis-3.1.4.tgz >> /tmp/redis.tgz \
+RUN DEBIAN_FRONTEND=noninteractive curl -L https://pecl.php.net/get/redis-3.1.4.tgz >> /tmp/redis.tgz \
     && mkdir -p /usr/src/php/ext/ && tar -xf /tmp/redis.tgz -C /usr/src/php/ext/ \
     && rm /tmp/redis.tgz \
     && docker-php-ext-install redis-3.1.4
